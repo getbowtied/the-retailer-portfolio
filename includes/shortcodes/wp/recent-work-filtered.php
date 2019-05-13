@@ -2,8 +2,9 @@
 
 // [recent_work_filtered]
 function tr_ext_shortcode_recent_work_filtered($atts, $content = null) {
-	global $theretailer_theme_options;
-	$sliderrandomid = rand();
+
+    wp_enqueue_script( 'gbt-tr-mixitup-scripts');
+
 	extract(shortcode_atts(array(
 		"items_per_row" => '4'
 	), $atts));
@@ -37,32 +38,17 @@ function tr_ext_shortcode_recent_work_filtered($atts, $content = null) {
             'posts_per_page' => 99999,
         ));
         
-        $portfolio_items = $number_of_portfolio_items->post_count;
-
         $post_counter = 0;
-        
-        if ((isset($theretailer_theme_options['portfolio_items_per_page'])) && ($theretailer_theme_options['portfolio_items_per_page'] != "0")) {
-            $posts_per_page = $theretailer_theme_options['portfolio_items_per_page'];
-        } else {
-            $posts_per_page = 99999;
-        }
 
-        $orderby = 'date';
-        $order = 'DESC';
-
-        if ( isset($theretailer_theme_options['portfolio_items_order_by']) && ($theretailer_theme_options['portfolio_items_order_by'] !== "") ) {
-	        $orderby = strtolower($theretailer_theme_options['portfolio_items_order_by']);
-    	}
-
-    	if ( isset($theretailer_theme_options['portfolio_items_order']) && ($theretailer_theme_options['portfolio_items_order'] !== "") ) {
-	        $order = $theretailer_theme_options['portfolio_items_order'];
-    	}
+        $portfolio_items_per_row    = get_option( 'tr_portfolio_items_per_row', 3 );
+        $portfolio_items_order_by   = get_option( 'tr_portfolio_items_order_by', 'date' );
+        $portfolio_items_order      = get_option( 'tr_portfolio_items_order', 'DESC' );
         
         $wp_query_portfolio_shortcode = new WP_Query(array(
             'post_type' => 'portfolio',
-            'posts_per_page' => $posts_per_page,
-            'orderby' => $orderby,
-            'order' => $order
+            'posts_per_page' => 99999,
+            'orderby' => $portfolio_items_order_by,
+            'order' => $portfolio_items_order 
         ));
                         
         while ($wp_query_portfolio_shortcode->have_posts()) : $wp_query_portfolio_shortcode->the_post();

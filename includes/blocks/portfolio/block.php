@@ -11,9 +11,8 @@ include_once 'functions/function-helpers.php';
 if( !function_exists('gbt_18_tr_render_frontend_portfolio') ) {
 	function gbt_18_tr_render_frontend_portfolio( $attributes ) {
 
-		global $theretailer_theme_options;
+		wp_enqueue_script( 'gbt-tr-mixitup-scripts');
 		
-		$sliderrandomid = rand();
 		$u = uniqid();
 		
 		extract(shortcode_atts(array(

@@ -3,6 +3,8 @@
 Template Name: Portfolio
 */
 
+wp_enqueue_script( 'gbt-tr-mixitup-scripts');
+
 $portfolio_items_per_row 	= get_option( 'tr_portfolio_items_per_row', 3 );
 $portfolio_items_order_by 	= get_option( 'tr_portfolio_items_order_by', 'date' );
 $portfolio_items_order 		= get_option( 'tr_portfolio_items_order', 'DESC' );

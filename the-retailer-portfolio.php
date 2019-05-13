@@ -56,7 +56,6 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 			$this->gbt_register_post_type();
 			$this->gbt_register_shortcode();
 			$this->gbt_register_scripts();
-			$this->gbt_register_admin_scripts();
 			$this->gbt_register_styles();
 			$this->gbt_add_block();
 
@@ -246,33 +245,14 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 		*/
 		public static function gbt_register_scripts() {
 			add_action( 'wp_enqueue_scripts', function() {
-				wp_enqueue_script(
-					'gbt-tr-portfolio-scripts',
-					plugins_url( 'includes/assets/js/portfolio.js', __FILE__ ), 
+				wp_register_script(
+					'gbt-tr-mixitup-scripts',
+					plugins_url( 'includes/_vendor/jquery.mixitup.min.js', __FILE__ ), 
 					array('jquery'),
 					false,
 					true
 				);
 			}, 300 );
-		}
-
-		/**
-		 * Enqueues portfolio admin scripts
-		 *
-		 * @return void
-		*/
-		public static function gbt_register_admin_scripts() {
-			if ( is_admin() ) {
-				add_action( 'admin_enqueue_scripts', function() {
-					global $post_type;
-					wp_enqueue_script(
-						'gbt-tr-portfolio-admin-scripts',
-						plugins_url( 'includes/assets/js/wp-admin-portfolio.js', __FILE__ ), 
-						array('wp-color-picker'), 
-						false
-					);
-				} );
-			}			
 		}
 
 		/**

@@ -2,7 +2,7 @@
 
 // [from_the_portfolio]
 function shortcode_from_the_portfolio($atts, $content = null) {
-	$sliderrandomid = rand();
+
 	extract(shortcode_atts(array(
 		"posts" => '4'
 	), $atts));
