@@ -122,7 +122,7 @@ if( !function_exists('gbt_18_tr_render_frontend_portfolio') ) {
 
 		<div class="wp-block-gbt-portfolio <?php echo $align; ?>">
 
-		    <div class="portfolio_section shortcode_portfolio mixitup-<?php echo $u;?>">		
+		    <div class="portfolio_section shortcode_portfolio mixitup mixitup-<?php echo $u;?>">		
 		            
 		        <div class="items_wrapper">
 		        

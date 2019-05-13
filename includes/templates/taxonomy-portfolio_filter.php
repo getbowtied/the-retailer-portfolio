@@ -1,12 +1,8 @@
 <?php
 
-global $theretailer_theme_options;
-
-if ( isset($theretailer_theme_options['portfolio_items_per_row']) ) {
-	$portfolio_items_per_row = $theretailer_theme_options['portfolio_items_per_row'];
-} else {
-	$portfolio_items_per_row = 3;
-}
+$portfolio_items_per_row 	= get_option( 'tr_portfolio_items_per_row', 3 );
+$portfolio_items_order_by 	= get_option( 'tr_portfolio_items_order_by', 'date' );
+$portfolio_items_order 		= get_option( 'tr_portfolio_items_order', 'DESC' );
 
 ?>
 
@@ -40,42 +36,18 @@ if ( isset($theretailer_theme_options['portfolio_items_per_row']) ) {
 				$temp = $wp_query;
 				$wp_query = null;
 				$post_counter = 0;
-				
-				if ((isset($theretailer_theme_options['portfolio_items_per_page'])) && ($theretailer_theme_options['portfolio_items_per_page'] != "0")) {
-					$posts_per_page = $theretailer_theme_options['portfolio_items_per_page'];
-				} else {
-					$posts_per_page = 99999;
-				}
-				
-				if (isset($theretailer_theme_options['portfolio_items_order_by'])) {
-					if ($theretailer_theme_options['portfolio_items_order_by'] == "Alphabetical") {
-						$orderby = 'title';
-						$order = 'ASC';
-					} else {
-						$orderby = strtolower($theretailer_theme_options['portfolio_items_order_by']);
-						$order = 'DESC';
-					}
-				} else {
-					$orderby = 'date';
-					$order = 'DESC';
-				}
-				
+
 				$wp_query = new WP_Query(array(
 					'post_type' => 'portfolio',
 					'portfolio_filter' => $term->slug,
-					'posts_per_page' => $posts_per_page,
-					'orderby' => $orderby,
-					'order' => $order,
+					'posts_per_page' => 99999,
+					'orderby' => $portfolio_items_order_by,
+					'order' => $portfolio_items_order,
 					'paged' => $paged
 				));
-				
+
 				// Detect page and page limit
-				$max = $wp_query->max_num_pages;
 				$paged = ( get_query_var('paged') > 1 ) ? get_query_var('paged') : 1;
-				
-				if ( ($posts_per_page > floor($portfolio_items/2)) && ($posts_per_page < $portfolio_items)  ) {
-					$max = 2;
-				}
 								
 				while ($wp_query->have_posts()) : $wp_query->the_post();
 					$post_counter++;
@@ -106,13 +78,7 @@ if ( isset($theretailer_theme_options['portfolio_items_per_row']) ) {
 				<?php endwhile; // end of the loop. ?>
                 
                 </div>
-            
-				<?php 
-				/*if (function_exists("emm_paginate")) {
-                    emm_paginate();
-                }*/
-				?>
-                
+                            
                 <?php $wp_query = null; $wp_query = $temp;?>
                 
                 <div class="clr"></div>
@@ -120,7 +86,9 @@ if ( isset($theretailer_theme_options['portfolio_items_per_row']) ) {
 			</div><!-- #content .site-content -->
 		</div><!-- #primary .content-area -->
         
-        <?php theretailer_content_nav( 'nav-below' ); ?>
+        <?php if( function_exists( 'theretailer_content_nav' ) ) {
+    		theretailer_content_nav( 'nav-below' ); 
+    	} ?>
         
 	</div>
 
@@ -129,13 +97,12 @@ if ( isset($theretailer_theme_options['portfolio_items_per_row']) ) {
 </div>
 
 <!--Mobile trigger footer widgets-->
-<?php global $theretailer_theme_options; ?>
+<?php $dark_footer = get_theme_mod('dark_footer_all_site', 0); ?>
 
-<?php if ( 	(!$theretailer_theme_options['dark_footer_all_site']) ||
-			($theretailer_theme_options['dark_footer_all_site'] == 0) ) : ?>
-				<div class="trigger-footer-widget-area">
-					<i class="getbowtied-icon-more-retailer"></i>
-				</div>
+<?php if ( $dark_footer == 0 ) : ?>
+	<div class="trigger-footer-widget-area">
+		<i class="getbowtied-icon-more-retailer"></i>
+	</div>
 <?php endif; ?>
 
 <div class="gbtr_widgets_footer_wrapper">

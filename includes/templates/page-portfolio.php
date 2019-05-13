@@ -3,15 +3,11 @@
 Template Name: Portfolio
 */
 
-global $theretailer_theme_options;
-
 $portfolio_items_per_row 	= get_option( 'tr_portfolio_items_per_row', 3 );
 $portfolio_items_order_by 	= get_option( 'tr_portfolio_items_order_by', 'date' );
 $portfolio_items_order 		= get_option( 'tr_portfolio_items_order', 'DESC' );
 
-
 if (isset($_GET["portfolio_cols"])) $portfolio_items_per_row = $_GET["portfolio_cols"];
-
 
 $u = uniqid();
 ?>
@@ -31,7 +27,7 @@ $u = uniqid();
 		$terms = get_terms("portfolio_filter");
 		if ( !empty( $terms ) && !is_wp_error( $terms ) ){
 			echo '<ul class="portfolio_categories">';
-            	echo '<li class="filter controls-'.$u.'" data-filter="all">' . __("All", "theretailer") . '</li>';
+            	echo '<li class="filter controls-'.$u.'" data-filter="all">' . __("All", "the-retailer-portfolio") . '</li>';
     		foreach ( $terms as $term ) {
             	echo '<li class="filter controls-'.$u.'" data-filter=".' . strtolower($term->slug) . '">' . $term->name . '</li>';
 			}
@@ -40,7 +36,7 @@ $u = uniqid();
 		
 		?>
   
-        <div class="content-area portfolio_section mixitup-<?php echo $u;?>">
+        <div class="content-area portfolio_section mixitup mixitup-<?php echo $u;?>">
         	<div class="content_wrapper">				
 				
                 <div class="items_wrapper shortcode_portfolio">
@@ -122,7 +118,9 @@ $u = uniqid();
 
 	    </script>
         
-        <?php theretailer_content_nav( 'nav-below' ); ?>
+        <?php if( function_exists( 'theretailer_content_nav' ) ) {
+    		theretailer_content_nav( 'nav-below' ); 
+    	} ?>
         
 	</div>
 
@@ -131,13 +129,12 @@ $u = uniqid();
 </div>
 
 <!--Mobile trigger footer widgets-->
-<?php global $theretailer_theme_options; ?>
+<?php $dark_footer = get_theme_mod('dark_footer_all_site', 0); ?>
 
-<?php if ( 	(!$theretailer_theme_options['dark_footer_all_site']) ||
-			($theretailer_theme_options['dark_footer_all_site'] == 0) ) : ?>
-				<div class="trigger-footer-widget-area">
-					<i class="getbowtied-icon-more-retailer"></i>
-				</div>
+<?php if ( $dark_footer == 0 ) : ?>
+	<div class="trigger-footer-widget-area">
+		<i class="getbowtied-icon-more-retailer"></i>
+	</div>
 <?php endif; ?>
 
 <div class="gbtr_widgets_footer_wrapper">

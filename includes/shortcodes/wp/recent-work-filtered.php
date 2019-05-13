@@ -26,7 +26,7 @@ function tr_ext_shortcode_recent_work_filtered($atts, $content = null) {
     
     ?>
 
-    <div class="portfolio_section shortcode_portfolio mixitup-<?php echo $u;?>">		
+    <div class="portfolio_section shortcode_portfolio mixitup mixitup-<?php echo $u;?>">		
             
         <div class="items_wrapper">
         

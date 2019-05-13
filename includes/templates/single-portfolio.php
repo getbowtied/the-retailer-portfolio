@@ -61,7 +61,9 @@
 
 <div class="container_12 portfolio_content_nav">
     <div class="grid_12">
-    	<?php theretailer_content_nav( 'nav-below' ); ?>
+    	<?php if( function_exists( 'theretailer_content_nav' ) ) {
+    		theretailer_content_nav( 'nav-below' ); 
+    	} ?>
     </div>
 </div>
 
@@ -136,13 +138,12 @@ if ($terms) {
            
 
 <!--Mobile trigger footer widgets-->
-<?php global $theretailer_theme_options; ?>
+<?php $dark_footer = get_theme_mod('dark_footer_all_site', 0); ?>
 
-<?php if ( 	(!$theretailer_theme_options['dark_footer_all_site']) ||
-			($theretailer_theme_options['dark_footer_all_site'] == 0) ) : ?>
-				<div class="trigger-footer-widget-area">
-					<i class="getbowtied-icon-more-retailer"></i>
-				</div>
+<?php if ( $dark_footer == 0 ) : ?>
+	<div class="trigger-footer-widget-area">
+		<i class="getbowtied-icon-more-retailer"></i>
+	</div>
 <?php endif; ?>
 
 <div class="gbtr_widgets_footer_wrapper">
