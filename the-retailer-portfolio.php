@@ -58,7 +58,7 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 			$this->gbt_register_scripts();
 			$this->gbt_register_admin_scripts();
 			$this->gbt_register_styles();
-			// $this->gbt_add_block();
+			$this->gbt_add_block();
 
 			add_filter( 'page_template', array( $this, 'gbt_mt_portfolio_page_template' ), 99 );
 			add_filter( 'single_template', array( $this, 'gbt_mt_portfolio_template' ), 99 );
@@ -218,7 +218,7 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 		public static function gbt_add_block() {
 			add_action( 'plugins_loaded', function() {
 				$registry = new WP_Block_Type_Registry;
-				if( !$registry->is_registered( 'getbowtied/mt-portfolio' ) ) {
+				if( !$registry->is_registered( 'getbowtied/tr-portfolio' ) ) {
 					include_once( 'includes/blocks/index.php' );
 				}
 			});

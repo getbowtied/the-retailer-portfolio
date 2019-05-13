@@ -1,101 +1,73 @@
-.gbt_18_mt_portfolio h2.portfolio-title {
-  word-break: break-word; }
+.wp-block-gbt-portfolio {
+  margin-bottom: 2.5rem; }
+  .wp-block-gbt-portfolio.full {
+    width: 100vw;
+    margin-left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%); }
+    .wp-block-gbt-portfolio.full .portfolio_item_img_container {
+      max-height: 422px; }
+    @media all and (min-width: 1024px) {
+      .wp-block-gbt-portfolio.full .portfolio_3_col_item_wrapper {
+        width: 31.6%; } }
+    @media all and (min-width: 768px) and (max-width: 1024px) {
+      .wp-block-gbt-portfolio.full .portfolio_3_col_item_wrapper {
+        width: 47%;
+        margin-right: 17px; } }
+    @media all and (min-width: 1024px) {
+      .wp-block-gbt-portfolio.full .portfolio_4_col_item_wrapper {
+        width: 23%; } }
+    @media all and (min-width: 1025px) and (max-width: 1313px) {
+      .wp-block-gbt-portfolio.full .portfolio_4_col_item_wrapper {
+        width: 31.6%; } }
+    @media all and (min-width: 768px) and (max-width: 1024px) {
+      .wp-block-gbt-portfolio.full .portfolio_4_col_item_wrapper {
+        width: 47%;
+        margin-right: 17px; } }
+    @media all and (min-width: 1024px) {
+      .wp-block-gbt-portfolio.full .portfolio_2_col_item_wrapper {
+        width: 47%; } }
+    @media all and (min-width: 768px) and (max-width: 1024px) {
+      .wp-block-gbt-portfolio.full .portfolio_2_col_item_wrapper {
+        margin-right: 17px; } }
+  @media all and (min-width: 960px) {
+    .wp-block-gbt-portfolio.wide {
+      width: 75vw;
+      margin-left: 50%;
+      -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      transform: translateX(-50%); } }
+  .wp-block-gbt-portfolio.wide .portfolio_item_img_container {
+    max-height: 345px; }
+  @media all and (min-width: 1024px) {
+    .wp-block-gbt-portfolio.wide .portfolio_3_col_item_wrapper {
+      width: 30%; } }
+  @media all and (min-width: 768px) and (max-width: 1024px) {
+    .wp-block-gbt-portfolio.wide .portfolio_3_col_item_wrapper {
+      width: 47%;
+      margin-right: 17px; } }
+  @media all and (min-width: 1024px) {
+    .wp-block-gbt-portfolio.wide .portfolio_2_col_item_wrapper {
+      width: 47%; } }
+  @media all and (min-width: 768px) and (max-width: 1024px) {
+    .wp-block-gbt-portfolio.wide .portfolio_2_col_item_wrapper {
+      margin-right: 17px; } }
+  @media all and (min-width: 1024px) {
+    .wp-block-gbt-portfolio.wide .portfolio_4_col_item_wrapper {
+      width: 23%; } }
+  @media all and (min-width: 1025px) and (max-width: 1313px) {
+    .wp-block-gbt-portfolio.wide .portfolio_4_col_item_wrapper {
+      width: 30%; } }
+  @media all and (min-width: 768px) and (max-width: 1024px) {
+    .wp-block-gbt-portfolio.wide .portfolio_4_col_item_wrapper {
+      width: 47%;
+      margin-right: 17px; } }
 
-.gbt_18_mt_portfolio .default_grid h2.portfolio-title,
-.gbt_18_mt_portfolio .default_grid p.portfolio-categories {
+.wp-block-gbt-portfolio.wide .portfolio_section,
+.wp-block-gbt-portfolio.full .portfolio_section {
   width: 100%; }
-
-.gbt_18_mt_portfolio .default_grid h2.portfolio-title {
-  padding: 40px 40px 5px; }
-
-.gbt_18_mt_portfolio .default_grid p.portfolio-categories {
-  padding: 0px 40px 33px; }
-
-.gbt_18_mt_portfolio.aligncenter .default_grid.items_per_row_4 h2.portfolio-title, .gbt_18_mt_portfolio.aligncenter .default_grid.items_per_row_5 h2.portfolio-title {
-  padding: 40px 10px 5px; }
-
-.gbt_18_mt_portfolio.aligncenter .default_grid.items_per_row_4 p.portfolio-categories, .gbt_18_mt_portfolio.aligncenter .default_grid.items_per_row_5 p.portfolio-categories {
-  padding: 0px 10px 33px; }
-
-.gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(1),
-.gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(8),
-.gbt_18_mt_portfolio.is-style-masonry_2 .portfolio-grid-items .portfolio-box:nth-child(3) {
-  width: 100%; }
-  @media only screen and (min-width: 30.063em) {
-    .gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(1),
-    .gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(8),
-    .gbt_18_mt_portfolio.is-style-masonry_2 .portfolio-grid-items .portfolio-box:nth-child(3) {
-      width: 100%;
-      padding-bottom: 100%; } }
-  @media only screen and (min-width: 56.3125em) {
-    .gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(1),
-    .gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(8),
-    .gbt_18_mt_portfolio.is-style-masonry_2 .portfolio-grid-items .portfolio-box:nth-child(3) {
-      width: 66.6666666666%;
-      padding-bottom: 66.6666666666%; } }
-  @media only screen and (min-width: 80em) {
-    .gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(1),
-    .gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(8),
-    .gbt_18_mt_portfolio.is-style-masonry_2 .portfolio-grid-items .portfolio-box:nth-child(3) {
-      width: 50%;
-      padding-bottom: 50%; } }
-  @media only screen and (min-width: 100.063em) {
-    .gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(1),
-    .gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(8),
-    .gbt_18_mt_portfolio.is-style-masonry_2 .portfolio-grid-items .portfolio-box:nth-child(3) {
-      width: 40%;
-      padding-bottom: 40%; } }
-
-.gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(2),
-.gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(7),
-.gbt_18_mt_portfolio.is-style-masonry_2 .portfolio-grid-items .portfolio-box:nth-child(8),
-.gbt_18_mt_portfolio.is-style-masonry_2 .portfolio-grid-items .portfolio-box:nth-child(13),
-.gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(3),
-.gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(8),
-.gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(11),
-.gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(14) {
-  width: 100%; }
-  @media only screen and (min-width: 30.063em) {
-    .gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(2),
-    .gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(7),
-    .gbt_18_mt_portfolio.is-style-masonry_2 .portfolio-grid-items .portfolio-box:nth-child(8),
-    .gbt_18_mt_portfolio.is-style-masonry_2 .portfolio-grid-items .portfolio-box:nth-child(13),
-    .gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(3),
-    .gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(8),
-    .gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(11),
-    .gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(14) {
-      width: 100%;
-      padding-bottom: 50%; } }
-  @media only screen and (min-width: 56.3125em) {
-    .gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(2),
-    .gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(7),
-    .gbt_18_mt_portfolio.is-style-masonry_2 .portfolio-grid-items .portfolio-box:nth-child(8),
-    .gbt_18_mt_portfolio.is-style-masonry_2 .portfolio-grid-items .portfolio-box:nth-child(13),
-    .gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(3),
-    .gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(8),
-    .gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(11),
-    .gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(14) {
-      width: 66.6666666666%;
-      padding-bottom: 33.3333333333%; } }
-  @media only screen and (min-width: 80em) {
-    .gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(2),
-    .gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(7),
-    .gbt_18_mt_portfolio.is-style-masonry_2 .portfolio-grid-items .portfolio-box:nth-child(8),
-    .gbt_18_mt_portfolio.is-style-masonry_2 .portfolio-grid-items .portfolio-box:nth-child(13),
-    .gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(3),
-    .gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(8),
-    .gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(11),
-    .gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(14) {
-      width: 50%;
-      padding-bottom: 25%; } }
-  @media only screen and (min-width: 100.063em) {
-    .gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(2),
-    .gbt_18_mt_portfolio.is-style-masonry_1 .portfolio-grid-items .portfolio-box:nth-child(7),
-    .gbt_18_mt_portfolio.is-style-masonry_2 .portfolio-grid-items .portfolio-box:nth-child(8),
-    .gbt_18_mt_portfolio.is-style-masonry_2 .portfolio-grid-items .portfolio-box:nth-child(13),
-    .gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(3),
-    .gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(8),
-    .gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(11),
-    .gbt_18_mt_portfolio.is-style-masonry_3 .portfolio-grid-items .portfolio-box:nth-child(14) {
-      width: 40%;
-      padding-bottom: 20%; } }
+  @media all and (min-width: 768px) {
+    .wp-block-gbt-portfolio.wide .portfolio_section,
+    .wp-block-gbt-portfolio.full .portfolio_section {
+      padding-left: 10px; } }

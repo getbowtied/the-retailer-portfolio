@@ -1,29 +1,26 @@
 ( function( blocks, components, editor, i18n, element ) {
 
-	const el = element.createElement;
+	const el 					= element.createElement;
 
 	/* Blocks */
-	const registerBlockType   	= blocks.registerBlockType;
+	const registerBlockType   	= wp.blocks.registerBlockType;
+		
+	const InspectorControls 	= wp.editor.InspectorControls;
+	const RichText				= wp.editor.RichText;
+	const BlockControls			= wp.editor.BlockControls;
 
-	const {
-		TextControl,
-		RangeControl,
-		SelectControl,
-		RadioControl,
-		ToggleControl,
-		SVG,
-		Path,
-	} = wp.components;
-
-	const {
-		InspectorControls,
-	} = wp.editor;
+	const TextControl 			= wp.components.TextControl;
+	const ToggleControl			= wp.components.ToggleControl;
+	const RangeControl			= wp.components.RangeControl;
+	const SelectControl			= wp.components.SelectControl;
+	const SVG 					= wp.components.SVG;
+	const Path 					= wp.components.Path;
 
 	const apiFetch 				= wp.apiFetch;
 
 	/* Register Block */
 	registerBlockType( 'getbowtied/tr-portfolio', {
-		title: i18n.__( 'Portfolio', 'the-retailer-portfolio' ),
+		title: i18n.__( 'Portfolio', 'theretailer-extender' ),
 		icon:
 			el( SVG, { xmlns:'http://www.w3.org/2000/svg', viewBox:'0 0 24 24' },
 				el( Path, { d:'M14 6V4h-4v2h4zM4 8v11h16V8H4zm16-2c1.11 0 2 .89 2 2v11c0 1.11-.89 2-2 2H4c-1.11 0-2-.89-2-2l.01-11c0-1.11.88-2 1.99-2h4V4c0-1.11.89-2 2-2h4c1.11 0 2 .89 2 2v2h4z' } ),
@@ -32,12 +29,6 @@
 		supports: {
 			align: [ 'center', 'wide', 'full' ],
 		},
-		styles: [
-			{ name: 'default',   label:  i18n.__( 'Equal Boxes', 'the-retailer-portfolio' ), isDefault: true },
-			{ name: 'masonry_1', label:  i18n.__( 'Masonry Style V1', 'the-retailer-portfolio' ) },
-			{ name: 'masonry_2', label:  i18n.__( 'Masonry Style V2', 'the-retailer-portfolio' ) },
-			{ name: 'masonry_3', label:  i18n.__( 'Masonry Style V3', 'the-retailer-portfolio' ) },
-		],
 		attributes: {
 			/* Products source */
 			result: {
@@ -95,15 +86,12 @@
 
 		edit: function( props ) {
 
-			let attributes = props.attributes;
-			let className  = props.className;
+			var attributes = props.attributes;
 
 			attributes.doneFirstLoad 		= attributes.doneFirstLoad || false;
 			attributes.categoryOptions 		= attributes.categoryOptions || [];
 			attributes.doneFirstItemsLoad 	= attributes.doneFirstItemsLoad || false;
 			attributes.result 				= attributes.result || [];
-
-			if( className.indexOf('is-style-') == -1 ) { className += ' is-style-default'; }
 
 			//==============================================================================
 			//	Helper functions
@@ -140,8 +128,6 @@
 						break;
 				}	
 
-				query += '&lang=' + portfolio_vars.language;
-
 				return query;
 			}
 
@@ -177,13 +163,6 @@
 				props.setAttributes({ categoriesSavedIDs: categoriesIDs });
 			}
 
-			function getWrapperClass() {
-				if( className.indexOf('is-style-default') >= 0 ) {
-					return 'gbt_18_mt_editor_portfolio_wrapper items_per_row_' + attributes.columns;
-				}
-				return 'gbt_18_mt_editor_portfolio_wrapper';
-			}
-
 			function _sortCategories( index, arr, newarr = [], level = 0) {
 				for ( let i = 0; i < arr.length; i++ ) {
 					if ( arr[i].parent == index) {
@@ -214,9 +193,9 @@
 
 			function _isLoadingText(){
 				if ( attributes.isLoading  === false ) {
-					return i18n.__('Update');
+					return i18n.__( 'Update', 'theretailer-extender' );
 				} else {
-					return i18n.__('Updating');
+					return i18n.__( 'Updating', 'theretailer-extender' );
 				}
 			}
 
@@ -251,10 +230,10 @@
 
 			function renderResults() {
 				if ( attributes.firstLoad === true ) {
-					apiFetch({ path: '/wp/v2/portfolio-item?per_page=12&orderby=date&order=desc&lang=' + portfolio_vars.language }).then(function (portfolio_items) {
+					apiFetch({ path: '/wp/v2/portfolio-item?per_page=12&orderby=date&order=desc' }).then(function (portfolio_items) {
 						props.setAttributes({ result: portfolio_items });
 						props.setAttributes({ firstLoad: false });
-						let query = '/wp/v2/portfolio-item?per_page=12&orderby=date&order=desc&lang=' + portfolio_vars.language;
+						let query = '/wp/v2/portfolio-item?per_page=12&orderby=date&order=desc';
 						props.setAttributes({queryItems: query});
 						props.setAttributes({ queryItemsLast: query});
 					});
@@ -271,10 +250,10 @@
 						let portfolio_image = [];
 						if ( portfolio_items[i]['fimg_url'] ) { 
 							portfolio_image.push(
-								el( 'span',
+								el( 'div',
 									{
-										key: 		'gbt_18_mt_editor_portfolio_item_thumbnail',
-										className: 	'gbt_18_mt_editor_portfolio_item_thumbnail',
+										key: 		'gbt_18_tr_editor_portfolio_item_thumbnail',
+										className: 	'gbt_18_tr_editor_portfolio_item_thumbnail',
 										style:
 										{
 											backgroundImage: 'url(' + portfolio_items[i]['fimg_url'] + ')'
@@ -287,32 +266,29 @@
 						postElements.push(
 							el( "div", 
 								{
-									key: 		'gbt_18_mt_editor_portfolio_item_box_' + portfolio_items[i].id, 
-									className: 	'gbt_18_mt_editor_portfolio_item_box'
+									key: 		'gbt_18_tr_editor_portfolio_item_box_' + portfolio_items[i].id, 
+									className: 	'gbt_18_tr_editor_portfolio_item_box'
 								},
-								el( 'a',
+								portfolio_image,
+								el( 'h2',
 									{
-										key: 		'gbt_18_mt_editor_portfolio_item_link',
-										className: 	'gbt_18_mt_editor_portfolio_item_link',
-										style:
-										{
-											backgroundColor: portfolio_items[i]['color_meta_box']
-										}
-									},
-									el( "div", 
-										{
-											key: 		'gbt_18_mt_editor_portfolio_item_content', 
-											className: 	'gbt_18_mt_editor_portfolio_item_content'
-										},
-										portfolio_image,
-										el( 'h2',
-											{
-												key: 'gbt_18_mt_editor_portfolio_item_title',
-												className: 'gbt_18_mt_editor_portfolio_item_title',
-												dangerouslySetInnerHTML: { __html: portfolio_items[i]['title']['rendered'] }
-											}
-										),
-									)
+										key: 'gbt_18_tr_editor_portfolio_item_title',
+										className: 'gbt_18_tr_editor_portfolio_item_title',
+										dangerouslySetInnerHTML: { __html: portfolio_items[i]['title']['rendered'] }
+									}
+								),
+								el( 'div',
+									{	
+										key: 		'gbt_18_tr_editor_portfolio_sep',
+										className: 	'gbt_18_tr_editor_portfolio_sep'
+									}
+								),
+								el( 'p',
+									{
+										key: 'gbt_18_tr_editor_portfolio_item_categories',
+										className: 'gbt_18_tr_editor_portfolio_item_categories',
+										dangerouslySetInnerHTML: { __html: portfolio_items[i]['categories'] }
+									}
 								)
 							)
 						);
@@ -322,8 +298,8 @@
 				wrapper.push(
 					el( 'div',
 						{
-							key: 		'gbt_18_mt_editor_portfolio_items',
-							className: 	'gbt_18_mt_editor_portfolio_items'
+							key: 		'gbt_18_tr_editor_portfolio_items',
+							className: 	'gbt_18_tr_editor_portfolio_items'
 						},
 						postElements
 					)
@@ -343,7 +319,7 @@
 				let optionsIDs = [];
 				let sorted = [];
 			
-				apiFetch({ path: '/wp/v2/portfolio-category?per_page=-1&lang=' + portfolio_vars.language }).then(function (categories) {
+				apiFetch({ path: '/wp/v2/portfolio-category?per_page=-1' }).then(function (categories) {
 
 				 	for( let i = 0; i < categories.length; i++) {
 	        			options[i] = {'label': categories[i].name.replace(/&amp;/g, '&'), 'value': categories[i].id, 'parent': categories[i].parent, 'count': categories[i].count };
@@ -426,14 +402,14 @@
 				el(
 					InspectorControls,
 					{
-						key: 'mt-portfolio-inspector'
+						key: 'tr-portfolio-inspector'
 					},
 					el(
 						'div',
 						{
 							className: 'main-inspector-wrapper',
 						},
-						el( 'label', { className: 'components-base-control__label' }, i18n.__( 'Categories:', 'the-retailer-portfolio' ), ),
+						el( 'label', { className: 'components-base-control__label' }, i18n.__( 'Categories:', 'theretailer-extender' ) ),
 						el(
 							'div',
 							{
@@ -445,15 +421,15 @@
 						el(
 							SelectControl,
 							{
-								key: 'mt-latest-posts-order-by',
+								key: 'tr-latest-posts-order-by',
 								options:
 									[
-										{ value: 'title_asc',   label: i18n.__( 'Alphabetical Ascending', 'the-retailer-portfolio' ) },
-										{ value: 'title_desc',  label: i18n.__( 'Alphabetical Descending', 'the-retailer-portfolio' ) },
-										{ value: 'date_asc',   	label: i18n.__( 'Date Ascending', 'the-retailer-portfolio' ) },
-										{ value: 'date_desc',  	label: i18n.__( 'Date Descending', 'the-retailer-portfolio' ) },
+										{ value: 'title_asc',   label: i18n.__( 'Alphabetical Ascending', 'theretailer-extender' ) },
+										{ value: 'title_desc',  label: i18n.__( 'Alphabetical Descending', 'theretailer-extender' ) },
+										{ value: 'date_asc',   	label: i18n.__( 'Date Ascending', 'theretailer-extender' ) },
+										{ value: 'date_desc',  	label: i18n.__( 'Date Descending', 'theretailer-extender' ) },
 									],
-	              				label: i18n.__( 'Order By' ),
+	              				label: i18n.__( 'Order By', 'theretailer-extender' ),
 	              				value: attributes.orderby,
 	              				onChange: function( value ) {
 	              					props.setAttributes( { orderby: value } );
@@ -465,14 +441,14 @@
 						el(
 							RangeControl,
 							{
-								key: "mt-portfolio-number",
+								key: "tr-portfolio-number",
 								className: 'range-wrapper',
 								value: attributes.number,
 								allowReset: false,
 								initialPosition: 12,
 								min: 1,
 								max: 20,
-								label: i18n.__( 'Number of Portfolio Items', 'the-retailer-portfolio' ),
+								label: i18n.__( 'Number of Portfolio Items', 'theretailer-extender' ),
 								onChange: function onChange(newNumber){
 									props.setAttributes( { number: newNumber } );
 									let newCategoriesSelected = attributes.categoriesIDs;
@@ -498,23 +474,23 @@
 							ToggleControl,
 							{
 								key: "portfolio-filters-toggle",
-	              				label: i18n.__( 'Show Filters?', 'the-retailer-portfolio' ),
+	              				label: i18n.__( 'Show Filters?', 'theretailer-extender' ),
 	              				checked: attributes.showFilters,
 	              				onChange: function() {
 									props.setAttributes( { showFilters: ! attributes.showFilters } );
 								},
 							}
 						),
-						props.className.indexOf('is-style-default') !== -1 && el(
+						el(
 							RangeControl,
 							{
-								key: "mt-portfolio-columns",
+								key: "tr-portfolio-columns",
 								value: attributes.columns,
 								allowReset: false,
 								initialPosition: 3,
-								min: 3,
-								max: 5,
-								label: i18n.__( 'Columns', 'the-retailer-portfolio' ),
+								min: 2,
+								max: 4,
+								label: i18n.__( 'Columns', 'theretailer-extender' ),
 								onChange: function( newColumns ) {
 									props.setAttributes( { columns: newColumns } );
 								},
@@ -524,13 +500,13 @@
 				),
 				el( 'div',
 					{
-						key: 		'gbt_18_mt_editor_portfolio',
-						className: 	'gbt_18_mt_editor_portfolio ' + className
+						key: 		'gbt_18_tr_editor_portfolio',
+						className: 	'gbt_18_tr_editor_portfolio'
 					},
 					el( 'div',
 						{
-							key: 		'gbt_18_mt_editor_portfolio_wrapper',
-							className: 	getWrapperClass(),
+							key: 		'gbt_18_tr_editor_portfolio_wrapper',
+							className: 	'gbt_18_tr_editor_portfolio_wrapper items_per_row_' + attributes.columns,
 						},
 						attributes.result.length < 1 && attributes.doneFirstItemsLoad === false && getPortfolioItems(),
 						renderResults()
@@ -538,9 +514,8 @@
 				)
 			];
 		},
-
-		save: function() {
-			return null;
+		save: function( props ) {
+			return '';
 		},
 	} );
 
