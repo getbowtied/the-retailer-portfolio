@@ -52,26 +52,35 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 		*/
 		public function __construct() {
 
-			// $this->gbt_mt_customizer_options();
-			// $this->gbt_register_post_type();
-			// $this->gbt_add_metabox();
-			// $this->gbt_register_shortcode();
-			// $this->gbt_register_scripts();
-			// $this->gbt_register_admin_scripts();
-			// $this->gbt_register_styles();
+			$this->gbt_tr_customizer_options();
+			$this->gbt_register_post_type();
+			$this->gbt_register_shortcode();
+			$this->gbt_register_scripts();
+			$this->gbt_register_admin_scripts();
+			$this->gbt_register_styles();
 			// $this->gbt_add_block();
 
-			// add_filter( 'single_template', array( $this, 'gbt_mt_portfolio_template' ), 99 );
-			// add_filter( 'taxonomy_template', array( $this, 'gbt_mt_portfolio_taxonomy_template' ), 99 );
+			add_filter( 'page_template', array( $this, 'gbt_mt_portfolio_page_template' ), 99 );
+			add_filter( 'single_template', array( $this, 'gbt_mt_portfolio_template' ), 99 );
+			add_filter( 'taxonomy_template', array( $this, 'gbt_mt_portfolio_taxonomy_template' ), 99 );
 
-			// if ( defined(  'WPB_VC_VERSION' ) ) {
-			// 	add_action( 'init', function() {
-			// 		include_once( 'includes/shortcodes/wb/portfolio.php' );
-			// 		if(function_exists('vc_set_default_editor_post_types')) {
-			// 			vc_set_default_editor_post_types( array('post','page','product','portfolio') );
-			// 		}
-			// 	} );
-			// }
+			if ( defined(  'WPB_VC_VERSION' ) ) {
+				add_action( 'init', function() {
+					include_once( 'includes/shortcodes/wb/recent-work-filtered.php' );
+					if(function_exists('vc_set_default_editor_post_types')) {
+						vc_set_default_editor_post_types( array('post','page','product','portfolio') );
+					}
+				} );
+			}
+
+			add_action( 'init', function() {
+				add_post_type_support( 'portfolio', 'excerpt' );
+			});
+
+			add_image_size('portfolio-details', 1180, 2000, true);
+			add_image_size('portfolio_4_col', 220, 165, true); //4X3
+			add_image_size('portfolio_3_col', 300, 225, true); //4X3
+			add_image_size('portfolio_2_col', 460, 345, true); //4X3
 		}
 
 		/**
@@ -91,8 +100,8 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 		 *
 		 * @return void
 		 */
-		protected function gbt_mt_customizer_options() {
-			add_action( 'customize_register', array( $this, 'gbt_mt_portfolio_customizer' ) );
+		protected function gbt_tr_customizer_options() {
+			add_action( 'customize_register', array( $this, 'gbt_tr_portfolio_customizer' ) );
 		}
 
 		/**
@@ -100,7 +109,7 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 		 *
 		 * @return void
 		 */
-		public function gbt_mt_portfolio_customizer( $wp_customize ) {
+		public function gbt_tr_portfolio_customizer( $wp_customize ) {
 
 			// Section
 			$wp_customize->add_section( 'portfolio', array(
@@ -109,22 +118,72 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 		 	) );
 
 		 	// Fields
-			$wp_customize->add_setting( 'mt_portfolio_slug', array(
+			$wp_customize->add_setting( 'tr_portfolio_items_per_row', array(
 				'type'		 			=> 'option',
 				'capability' 			=> 'manage_options',
-				'default'     			=> 'portfolio-item',
+				'default'     			=> 3,
 			) );
 
 			$wp_customize->add_control( 
 				new WP_Customize_Control(
 					$wp_customize,
-					'mt_portfolio_slug',
+					'tr_portfolio_items_per_row',
 					array( 
-						'type'			=> 'text',
-						'label'       	=> esc_attr__( 'Portfolio Posts Slug', 'the-retailer-portfolio' ),
-						'description' 	=> __('<span class="dashicons dashicons-editor-help"></span>Default slug is "portfolio-item". Enter a custom one to overwrite it. <br/><b>You need to regenerate your permalinks if you modify this!</b>', 'the-retailer-portfolio'),
+						'type'			=> 'number',
+						'label'       	=> esc_attr__( 'Number of Portfolio Items per row', 'the-retailer-portfolio' ),
 						'section'     	=> 'portfolio',
-						'priority'    	=> 20,
+						'priority'    	=> 10,
+						'input_attrs'	=> array(
+					        'min'  => 2,
+					        'max'  => 4,
+					        'step' => 1
+					    ),
+					)
+				)
+			);
+
+			$wp_customize->add_setting( 'tr_portfolio_items_order_by', array(
+				'type'		 			=> 'option',
+				'capability' 			=> 'manage_options',
+				'default'     			=> 'date',
+			) );
+
+			$wp_customize->add_control( 
+				new WP_Customize_Control(
+					$wp_customize,
+					'tr_portfolio_items_order_by',
+					array( 
+						'type'			=> 'select',
+						'label'       	=> esc_attr__( 'Order By', 'the-retailer-portfolio' ),
+						'section'     	=> 'portfolio',
+						'priority'    	=> 10,
+						'choices'    	=> array(
+					    	'date' 	=> 'Date',
+					    	'title' => 'Title',
+					    )
+					)
+				)
+			);
+
+			$wp_customize->add_setting( 'tr_portfolio_items_order', array(
+				'type'		 			=> 'option',
+				'capability' 			=> 'manage_options',
+				'default'     			=> 'DESC',
+			) );
+
+			$wp_customize->add_control( 
+				new WP_Customize_Control(
+					$wp_customize,
+					'tr_portfolio_items_order',
+					array( 
+						'type'			=> 'select',
+						'label'       	=> esc_attr__( 'Order By', 'the-retailer-portfolio' ),
+						'section'     	=> 'portfolio',
+						'priority'    	=> 10,
+						'choices'    	=> array(
+					    	'DESC'     => 'DESC',
+			        		'ASC'    => 'ASC',
+					    )
 					)
 				)
 			);
@@ -142,22 +201,13 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 		}
 
 		/**
-		 * Adds portfolio metabox
-		 *
-		 * @return void
-		*/
-		public static function gbt_add_metabox() {
-			
-			include_once( 'includes/portfolio/metabox.php' );
-		}
-
-		/**
 		 * Registers portfolio shortcode
 		 *
 		 * @return void
 		*/
 		public static function gbt_register_shortcode() {
-			include_once( 'includes/shortcodes/wp/portfolio.php' );
+			include_once( 'includes/shortcodes/wp/from-the-portfolio.php' );
+			include_once( 'includes/shortcodes/wp/recent-work-filtered.php' );
 		}
 
 		/**
@@ -182,7 +232,7 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 		public static function gbt_register_styles() {
 			add_action( 'wp_enqueue_scripts', function() {
 				wp_enqueue_style(
-					'gbt-mt-portfolio-styles', 
+					'gbt-tr-portfolio-styles', 
 					plugins_url( 'includes/assets/css/portfolio.css', __FILE__ ), 
 					NULL
 				);
@@ -197,7 +247,7 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 		public static function gbt_register_scripts() {
 			add_action( 'wp_enqueue_scripts', function() {
 				wp_enqueue_script(
-					'gbt-mt-portfolio-scripts',
+					'gbt-tr-portfolio-scripts',
 					plugins_url( 'includes/assets/js/portfolio.js', __FILE__ ), 
 					array('jquery'),
 					false,
@@ -216,7 +266,7 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 				add_action( 'admin_enqueue_scripts', function() {
 					global $post_type;
 					wp_enqueue_script(
-						'gbt-mt-portfolio-admin-scripts',
+						'gbt-tr-portfolio-admin-scripts',
 						plugins_url( 'includes/assets/js/wp-admin-portfolio.js', __FILE__ ), 
 						array('wp-color-picker'), 
 						false
@@ -247,8 +297,22 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 		*/
 		public static function gbt_mt_portfolio_taxonomy_template( $template ) {
 
-			if( is_tax( 'portfolio_categories' ) ) {
-				$template = plugin_dir_path(__FILE__) . 'includes/templates/taxonomy-portfolio_categories.php';
+			if( is_tax( 'portfolio_filter' ) ) {
+				$template = plugin_dir_path(__FILE__) . 'includes/templates/taxonomy-portfolio_filter.php';
+			}
+
+			return $template;
+		}
+
+		/**
+		 * Loads portfolio page template
+		 *
+		 * @return void
+		*/
+		public static function gbt_mt_portfolio_page_template( $template ) {
+
+			if( is_page_template( 'page-portfolio.php' ) ) {
+				$template = plugin_dir_path(__FILE__) . 'includes/templates/page-portfolio.php';
 			}
 
 			return $template;
