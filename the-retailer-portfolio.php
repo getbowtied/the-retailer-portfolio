@@ -205,7 +205,6 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 		 * @return void
 		*/
 		public static function gbt_register_shortcode() {
-			include_once( 'includes/shortcodes/wp/from-the-portfolio.php' );
 			include_once( 'includes/shortcodes/wp/recent-work-filtered.php' );
 		}
 
