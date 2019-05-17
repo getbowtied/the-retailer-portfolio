@@ -280,18 +280,4 @@
 	.aside_portfolio {
 		padding-left:20px;
 	}
-
-	.portfolio_content_nav #nav-below .nav-previous-single,
-	.portfolio_content_nav #nav-below .nav-next-single
-	{
-		width:347px;
-	}
-}
-
-@media only screen and (max-width: 719px) {
-	.portfolio_content_nav #nav-below .nav-previous-single,
-	.portfolio_content_nav #nav-below .nav-next-single
-	{
-		width:100%;
-	}
 }
