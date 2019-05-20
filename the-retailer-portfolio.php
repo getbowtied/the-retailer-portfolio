@@ -255,7 +255,7 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 		*/
 		public static function gbt_register_scripts() {
 			add_action( 'wp_enqueue_scripts', function() {
-				wp_register_script(
+				wp_enqueue_script(
 					'gbt-tr-mixitup-scripts',
 					plugins_url( 'includes/_vendor/jquery.mixitup.min.js', __FILE__ ), 
 					array('jquery'),
@@ -301,7 +301,7 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 		*/
 		public static function gbt_mt_portfolio_page_template( $template ) {
 
-			if( is_page_template( 'page-portfolio.php' ) ) {
+			if( is_page_template( 'page-portfolio.php' ) ) {			
 				$template = plugin_dir_path(__FILE__) . 'includes/templates/page-portfolio.php';
 			}
 

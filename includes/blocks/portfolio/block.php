@@ -11,8 +11,6 @@ include_once 'functions/function-helpers.php';
 if( !function_exists('gbt_18_tr_render_frontend_portfolio') ) {
 	function gbt_18_tr_render_frontend_portfolio( $attributes ) {
 
-		wp_enqueue_script( 'gbt-tr-mixitup-scripts');
-		
 		$u = uniqid();
 		
 		extract(shortcode_atts(array(

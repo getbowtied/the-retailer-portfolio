@@ -3,8 +3,6 @@
 // [recent_work_filtered]
 function tr_ext_shortcode_recent_work_filtered($atts, $content = null) {
 
-    wp_enqueue_script( 'gbt-tr-mixitup-scripts');
-
 	extract(shortcode_atts(array(
 		"items_per_row" => '4'
 	), $atts));
