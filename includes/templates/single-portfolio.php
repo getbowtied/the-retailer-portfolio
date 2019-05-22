@@ -1,153 +1,96 @@
-<?php get_header(); ?>
+<?php 
+
+global $wp_query, $post;
+
+get_header(); 
+
+?>
 
 <div class="global_content_wrapper">
 
-<div class="container_12" itemscope itemtype="http://schema.org/CreativeWork">
+	<div class="container_12">
 
-    <div class="grid_4 push_8">
-    
-		<div class="aside_portfolio">
-			
-			<div class="entry-content-aside">
-				<?php while ( have_posts() ) : the_post(); ?>
-                
-                <h1 class="entry-title portfolio_item_title" itemprop="name"><?php the_title(); ?></h1>
-                
-                <div class="portfolio_details_sep"></div>
-                
-                <div class="portfolio_details_item_cat" itemprop="genre">                    
-                    <?php 
-                    echo get_the_term_list( get_the_ID(), 'portfolio_filter', "","&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;" );
-                    ?>
-                </div>
-                
-				<div itemprop="text">
-				<?php
-				if ( !empty( $post->post_excerpt ) ) :
-					the_excerpt();
-				else :
-					false;
-				endif;
-				?>
-                </div>
-    
-                <?php endwhile; // end of the loop. ?>
-            </div>
-        </div>
-        
-    </div>
-    
-    <div class="grid_8 pull_4">
+	    <div class="grid_4 push_8">
+	    
+			<div class="aside_portfolio">
+				
+				<div class="entry-content-aside">
+					<?php while( have_posts() ) : the_post(); ?>
+	                
+		                <h1 class="entry-title portfolio_item_title"><?php the_title(); ?></h1>
+		                
+		                <div class="portfolio_details_sep"></div>
+		                
+		                <div class="portfolio_details_item_cat">                    
+		                    <?php echo get_the_term_list( get_the_ID(), 'portfolio_filter', "", "/" ); ?>
+		                </div>
+		                
+						<div><?php if( !empty( $post->post_excerpt ) ) { the_excerpt(); } ?></div>
+	    
+	                <?php endwhile; ?>
+	            </div>
 
-		<div id="primary" class="content-area">
-			<div id="content" class="site-content" role="main">
+	        </div>
+	        
+	    </div>
+	    
+	    <div class="grid_8 pull_4">
 
-			<div class="entry-content entry-content-portfolio">
-				<?php while ( have_posts() ) : the_post(); ?>
-                	<?php the_content(); ?>
-                <?php endwhile; // end of the loop. ?>
-            </div>
+			<div id="primary" class="content-area">
+				
+				<div id="content" class="site-content" role="main">
 
-			</div><!-- #content .site-content -->
-		</div><!-- #primary .content-area -->
+				<div class="entry-content entry-content-portfolio">
+					<?php while( have_posts() ) { the_post(); the_content(); } ?>
+	            </div>
 
+				</div>
+
+			</div>
+
+		</div>
+	    
+	    <div class="clr"></div>
+	    
 	</div>
-    
-    <div class="clr"></div>
-    
-</div>
 
 </div>
 
 <div class="container_12 portfolio_content_nav">
-    <div class="grid_12">
-    	<?php if( function_exists( 'theretailer_content_nav' ) ) {
-    		theretailer_content_nav( 'nav-below' ); 
-    	} ?>
-    </div>
+	<?php
+
+		$previous = ( is_attachment() ) ? get_post( $post->post_parent ) : get_adjacent_post( false, '', true );
+		$next = get_adjacent_post( false, '', false );
+		if ( $next || $previous ) { ?>
+
+		<nav role="navigation" id="nav-below" class="post-navigation">
+			<div class="nav-previous-single"><?php previous_post_link( '%link', '<span class="meta-nav"></span> %title' ); ?></div>
+			<div class="nav-next-single"><?php next_post_link( '%link', '%title <span class="meta-nav"></span>' ); ?></div>
+		</nav>
+
+	<?php } ?>
 </div>
 
 <?php
 
-$terms = get_the_terms( $post->ID, 'portfolio_filter');
+$terms 		= get_the_terms( $post->ID, 'portfolio_filter');
+$related 	= array();
 
 if ($terms) {
-
 	$terms_array = array();
-	
 	foreach ($terms as $term) {
 		$terms_array[] = $term->slug;
 	}
-	
-	$args = array(
-		'posts_per_page' => 4,
-		'order_by' => 'rand',
-		'post_type' => 'portfolio',
-		'post_status' => 'publish',
-		'exclude' => $post->ID,
-		'tax_query' => array(
-							array('taxonomy' => 'portfolio_filter',
-									'field' => 'slug',
-									'terms' => $terms_array
-							))
-	);
-	
-	$related = get_posts($args);
 
+	$related = get_portfolio_items( $terms_array, null, 4, '', 'rand', array( $post->ID ) );
 }
 
-?>
+if( $related ) { ?>
 
-
-<?php if ($related) { ?>
-	<div class="container_12 portfolio_related">
-	
-		<?php foreach( $related as $related_post ) { ?>
-        <div class="grid_3">            
-            
-            <?php
-			
-			$related_thumb = wp_get_attachment_image_src( get_post_thumbnail_id($related_post->ID), 'full' );
-			
-			?>
-            
-            <div class="portfolio_item">
-                <div class="portfolio_item_img_container">
-					<a href="<?php echo get_permalink($related_post->ID); ?>">
-						<img src="<?php echo $related_thumb[0]; ?>" alt="" />
-					</a>
-				</div>
-                <a class="portfolio-title" href="<?php echo get_permalink($related_post->ID); ?>"><h3><?php echo $related_post->post_title; ?></h3></a>
-                <div class="portfolio_sep"></div>
-                <div class="portfolio_item_cat">
-
-                <?php 
-                echo strip_tags (
-                    get_the_term_list( $related_post->ID, 'portfolio_filter', "",", " )
-                );
-                ?>
-                
-                </div>
-            </div>  
-            
-        </div>   
-        <?php } ?>
-    
+	<div class="container_12">
+		<?php portfolio_output( $related, 4, false, 'portfolio_related' ); ?>
     </div>
+
 <?php } ?>
            
-
-<!--Mobile trigger footer widgets-->
-<?php $dark_footer = get_theme_mod('dark_footer_all_site', 0); ?>
-
-<?php if ( $dark_footer == 0 ) : ?>
-	<div class="trigger-footer-widget-area">
-		<i class="getbowtied-icon-more-retailer"></i>
-	</div>
-<?php endif; ?>
-
-<div class="gbtr_widgets_footer_wrapper">
-
-<?php get_template_part("dark_footer"); ?>
-
-<?php get_footer(); ?>
+<?php gbt_get_page_footer(); ?>

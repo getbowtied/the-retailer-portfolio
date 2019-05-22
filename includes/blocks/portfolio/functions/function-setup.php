@@ -23,21 +23,6 @@ if ( ! function_exists( 'gbt_18_tr_portfolio_editor_assets' ) ) {
 }
 
 //==============================================================================
-//	Enqueue Frontend Assets
-//==============================================================================
-add_action( 'enqueue_block_assets', 'gbt_18_tr_portfolio_assets' );
-if ( ! function_exists( 'gbt_18_tr_portfolio_assets' ) ) {
-	function gbt_18_tr_portfolio_assets() {
-		
-		wp_enqueue_style(
-			'gbt_18_tr_portfolio_styles',
-			plugins_url( 'assets/css/style.css', dirname(__FILE__) ),
-			array()
-		);
-	}
-}
-
-//==============================================================================
 //	Register Block Type
 //==============================================================================
 if ( function_exists( 'register_block_type' ) ) {

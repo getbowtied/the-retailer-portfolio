@@ -63,6 +63,8 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 				add_post_type_support( 'portfolio', 'excerpt' );
 			});
 
+			include_once( 'includes/helpers/helpers.php' );
+
 			add_image_size('portfolio-details', 1180, 2000, true);
 			add_image_size('portfolio_4_col', 220, 165, true); //4X3
 			add_image_size('portfolio_3_col', 300, 225, true); //4X3
@@ -255,6 +257,7 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 		*/
 		public static function gbt_register_scripts() {
 			add_action( 'wp_enqueue_scripts', function() {
+
 				wp_enqueue_script(
 					'gbt-tr-mixitup-scripts',
 					plugins_url( 'includes/_vendor/jquery.mixitup.min.js', __FILE__ ), 
@@ -262,6 +265,15 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 					false,
 					true
 				);
+
+				wp_enqueue_script(
+					'gbt-tr-portfolio-scripts',
+					plugins_url( 'includes/assets/js/portfolio.js', __FILE__ ), 
+					array('jquery'),
+					false,
+					true
+				);
+
 			}, 300 );
 		}
 
