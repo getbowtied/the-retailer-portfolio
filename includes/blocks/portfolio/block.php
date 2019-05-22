@@ -31,19 +31,19 @@ if( !function_exists('gbt_18_tr_render_frontend_portfolio') ) {
 
 	    switch ( $orderby ) {
 	        case 'date_asc' :
-	            $orderby = 'date';
+	            $order_by = 'date';
 	            $order   = 'asc';
 	            break;
 	        case 'date_desc' :
-	            $orderby = 'date';
+	            $order_by = 'date';
 	            $order   = 'desc';
 	            break;
 	        case 'title_asc' :
-	            $orderby = 'title';
+	            $order_by = 'title';
 	            $order   = 'asc';
 	            break;
 	        case 'title_desc':
-	            $orderby = 'title';
+	            $order_by = 'title';
 	            $order   = 'desc';
 	            break;
 	        default:
@@ -56,7 +56,7 @@ if( !function_exists('gbt_18_tr_render_frontend_portfolio') ) {
 			$terms_array[] = get_term($cat)->slug;
 		}
 
-		$portfolioItems = get_portfolio_items( $terms_array, null, $number, $order, $orderby, '' );
+		$portfolioItems = get_portfolio_items( $terms_array, null, $number, $order, $order_by, '' );
 		portfolio_output( $portfolioItems, $columns, $showFilters, '', $categories );
 
 		wp_reset_query();
