@@ -14,10 +14,13 @@
 .single-portfolio .portfolio_related {
   border-top: 1px solid #ccc;
   margin-bottom: 30px;
-  padding-top: 20px; }
+  padding-top: 30px; }
   @media screen and (max-width: 719px) {
     .single-portfolio .portfolio_related {
       margin: 0 20px; } }
+  @media screen and (min-width: 959px) {
+    .single-portfolio .portfolio_related .content_wrapper {
+      margin: 0 -8px; } }
 
 .single-portfolio .portfolio_content_nav {
   padding: 0 20px; }
@@ -34,10 +37,10 @@
 
 .portfolio_categories {
   margin: 0;
-  padding: 0;
+  padding: 0 !important;
   list-style: none;
   text-align: center;
-  margin: 20px 0 25px; }
+  margin: 20px 0 20px; }
   .portfolio_categories li {
     display: inline-block;
     margin: 0 4px 10px 4px;
@@ -101,32 +104,35 @@
 .portfolio_4_col_item_wrapper {
   width: calc(25% - 19px); }
 
+.entry-content .portfolio_item,
 .portfolio_item {
   margin-bottom: 30px !important;
   text-align: center; }
+  .entry-content .portfolio_item h3,
   .portfolio_item h3 {
     display: block;
     font-size: 18px;
     line-height: 1.3em;
     font-weight: normal;
-    padding: 0; }
+    padding: 0;
+    color: inherit; }
+  .entry-content .portfolio_item img,
   .portfolio_item img {
     width: 100%;
     height: auto; }
+  .entry-content .portfolio_item a,
   .portfolio_item a {
     color: #000;
     display: block; }
-    .portfolio_item a:hover {
-      color: #b39964; }
 
 .portfolio-title,
 .portfolio_item_img_container {
-  padding: 10px 0; }
+  padding: 10px 0;
+  margin-top: 5px; }
 
 .portfolio_sep {
   width: 60px;
   height: 2px;
-  background: #b39964;
   margin: 0 auto; }
 
 .portfolio_item_cat {
@@ -145,7 +151,6 @@
 .portfolio_details_sep {
   width: 60px;
   height: 2px;
-  background: #b39964;
   margin: 15px 0;
   clear: both; }
 
@@ -154,11 +159,11 @@
   text-transform: uppercase;
   padding: 10px 0 20px 0;
   font-weight: 900;
-  font-size: 12px; }
+  font-size: 12px;
+  margin-left: -10px; }
   .portfolio_details_item_cat a {
-    padding: 0 10px; }
-    .portfolio_details_item_cat a:first-child {
-      padding-left: 0; }
+    padding: 0 10px;
+    display: inline-block; }
     .portfolio_details_item_cat a:last-child {
       padding-right: 0; }
   .portfolio_details_item_cat span {
