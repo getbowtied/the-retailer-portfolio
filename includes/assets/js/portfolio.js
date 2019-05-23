@@ -4,9 +4,13 @@ jQuery(document).ready(function($) {
 
 	$('.gbt_portfolio_wrapper.mixitup').each(function() {
 
-		$(this).mixItUp({
+		var containerEl = $(this).find('.container');
+		var uniqueId = $(this).attr('id');
+
+		var mixer = mixitup( containerEl, {
 	     	selectors: {
-	       		filter: $(this).find('.controls'),
+	     		target: '.portfolio_item.' + uniqueId,
+	       		control: '.portfolio_categories.'+ uniqueId+' .control',
 	     	}
     	});
 	});

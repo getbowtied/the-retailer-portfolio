@@ -1,7 +1,6 @@
 .gbt_portfolio_wrapper {
-  margin-bottom: 2.5rem; }
-  .gbt_portfolio_wrapper.mixitup .mix {
-    display: none; }
+  margin-bottom: 2.5rem;
+  overflow: hidden; }
 
 .single-portfolio .global_content_wrapper {
   margin: 70px auto 50px auto; }

@@ -19,7 +19,11 @@ if( !function_exists('gbt_18_tr_render_frontend_portfolio') ) {
 	        'align'                     => 'center',
 	        'orderby'                   => 'date_desc',
 	    ), $attributes));
+
 		ob_start();
+
+		$categories = array();
+		$terms_array = array();
 
 		if( substr($categoriesSavedIDs, - 1) == ',' ) {
 	        $categoriesSavedIDs = substr( $categoriesSavedIDs, 0, -1);
@@ -50,10 +54,13 @@ if( !function_exists('gbt_18_tr_render_frontend_portfolio') ) {
 	        	break;
 	    }
 
-	    $terms_array = array();
-		$categories = explode(",",$categoriesSavedIDs);
-		foreach( $categories as $cat ) {
-			$terms_array[] = get_term($cat)->slug;
+	    if( !empty($categoriesSavedIDs) ) {
+			$categories = explode(",",$categoriesSavedIDs);
+			if($categories) {
+				foreach( $categories as $cat ) {
+					$terms_array[] = get_term($cat)->slug;
+				}
+			}
 		}
 
 		$portfolioItems = get_portfolio_items( $terms_array, null, $number, $order, $order_by, '' );

@@ -260,7 +260,7 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 
 				wp_enqueue_script(
 					'gbt-tr-mixitup-scripts',
-					plugins_url( 'includes/_vendor/jquery.mixitup.min.js', __FILE__ ), 
+					plugins_url( 'includes/assets/js/vendor/mixitup.min.js', __FILE__ ), 
 					array('jquery'),
 					false,
 					true

@@ -35,11 +35,13 @@ function get_portfolio_items( $categories = '', $paged = null, $posts_per_page =
 /*
 * Get Portfolio Output
 */
-function portfolio_output( $wp_query, $items_per_row = 3, $filters = true, $extra_class = '', $categories = array() ) { ?>
+function portfolio_output( $wp_query, $items_per_row = 3, $filters = true, $extra_class = '', $categories = array() ) { 
 
-	<?php if( $wp_query->have_posts() ) : ?>
+	$unique = uniqid( 'mixitup-' );
 
-		<div class="content-area portfolio_section mixitup gbt_portfolio_wrapper <?php echo $extra_class; ?>">
+	if( $wp_query->have_posts() ) : ?>
+
+		<div id="<?php echo $unique; ?>" class="content-area portfolio_section mixitup gbt_portfolio_wrapper <?php echo $extra_class; ?>">
 
 			<?php
 
@@ -62,19 +64,19 @@ function portfolio_output( $wp_query, $items_per_row = 3, $filters = true, $extr
 						}
 					}
 
-				    if ( !empty( $terms ) && !is_wp_error( $terms ) ){
-				        echo '<ul class="portfolio_categories">';
-				            echo '<li class="filter controls" data-filter="all">' . __("All", "the-retailer-portfolio") . '</li>';
-				        foreach ( $terms as $term ) {
-				            echo '<li class="filter controls" data-filter=".' . strtolower($term['slug']) . '">' . $term['name'] . '</li>';
-				        }
-				        echo '</ul>';
-				    }
+				    if ( !empty( $terms ) && !is_wp_error( $terms ) ) { ?>
+				        <ul class="portfolio_categories <?php echo $unique; ?>">
+				            <li class="control" data-filter="all"><?php _e( "All", "the-retailer-portfolio" ); ?></li>
+				        <?php foreach ( $terms as $term ) { ?>
+				            <li class="control" data-filter=".<?php echo strtolower($term['slug']); ?>"><?php echo $term['name']; ?></li>
+				        <?php } ?>
+				       </ul>
+				    <?php }
 				}
 
 			?>
 
-	    	<div class="content_wrapper">
+	    	<div class="content_wrapper container">
 
 				<?php while ($wp_query->have_posts()) : $wp_query->the_post();
 
@@ -86,7 +88,7 @@ function portfolio_output( $wp_query, $items_per_row = 3, $filters = true, $extr
 					}
 				?>
 
-					<div class="portfolio_item portfolio_<?php echo $items_per_row; ?>_col_item_wrapper mix <?php echo $categories; ?>">
+					<div class="portfolio_item <?php echo $unique; ?> portfolio_<?php echo $items_per_row; ?>_col_item_wrapper mix <?php echo $categories; ?>">
 	                    
                     	<a class="img_zoom_in" href="<?php echo get_permalink(get_the_ID()); ?>">
                             <div class="portfolio_item_img_container" style="background-image:url(<?php echo $related_thumb[0]; ?>)"></div>
