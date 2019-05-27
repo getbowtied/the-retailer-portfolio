@@ -10,7 +10,7 @@
  * Text Domain:				the-retailer-portfolio
  * Domain Path:				/languages/
  * Requires at least: 		5.0
- * Tested up to: 			5.2
+ * Tested up to: 			5.2.1
  *
  * @package  The Retailer Portfolio
  * @author   GetBowtied
