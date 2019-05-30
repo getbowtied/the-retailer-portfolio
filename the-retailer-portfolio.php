@@ -77,14 +77,14 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 			add_filter( 'taxonomy_template', array( $this, 'gbt_mt_portfolio_taxonomy_template' ), 99 );
 
 			// Shortcode
-			if ( defined(  'WPB_VC_VERSION' ) ) {
-				add_action( 'init', function() {
+			add_action( 'plugins_loaded', function() {
+				if ( defined(  'WPB_VC_VERSION' ) ) {
 					include_once( 'includes/shortcodes/wb/recent-work-filtered.php' );
 					if(function_exists('vc_set_default_editor_post_types')) {
 						vc_set_default_editor_post_types( array('post','page','product','portfolio') );
 					}
-				} );
-			}
+				}
+			});
 		}
 
 		/**
