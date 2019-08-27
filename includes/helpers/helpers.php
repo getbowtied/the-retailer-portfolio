@@ -12,7 +12,7 @@ function get_portfolio_items( $categories = '', $paged = null, $posts_per_page =
         'post_type' 	 => 'portfolio',
         'posts_per_page' => $posts_per_page,
         'orderby' 		 => $portfolio_items_order_by,
-        'order' 		 => $portfolio_items_order 
+        'order' 		 => $portfolio_items_order
     );
 
     if( !empty($categories) ) {
@@ -35,7 +35,7 @@ function get_portfolio_items( $categories = '', $paged = null, $posts_per_page =
 /*
 * Get Portfolio Output
 */
-function portfolio_output( $wp_query, $items_per_row = 3, $filters = true, $extra_class = '', $categories = array() ) { 
+function portfolio_output( $wp_query, $items_per_row = 3, $filters = true, $extra_class = '', $categories = array() ) {
 
 	$unique = uniqid( 'mixitup-' );
 
@@ -89,7 +89,7 @@ function portfolio_output( $wp_query, $items_per_row = 3, $filters = true, $extr
 				?>
 
 					<div class="portfolio_item <?php echo $unique; ?> portfolio_<?php echo $items_per_row; ?>_col_item_wrapper mix <?php echo $categories; ?>">
-	                    
+
                     	<a class="img_zoom_in" href="<?php echo get_permalink(get_the_ID()); ?>">
                             <div class="portfolio_item_img_container" style="background-image:url(<?php echo $related_thumb[0]; ?>)"></div>
 						</a>
@@ -105,7 +105,7 @@ function portfolio_output( $wp_query, $items_per_row = 3, $filters = true, $extr
                         </div>
 
 	                </div>
-				
+
 				<?php endwhile; ?>
 
 	            <div class="clr"></div>
@@ -123,19 +123,16 @@ function portfolio_output( $wp_query, $items_per_row = 3, $filters = true, $extr
 */
 function gbt_get_page_footer() {
 
-	// Mobile trigger footer widgets
-	$dark_footer = get_theme_mod('dark_footer_all_site', '0');
-	if ( $dark_footer == '0' ) { ?>
+	if ( get_theme_mod( 'dark_footer_all_site', '0' ) == '0' ) { ?>
 		<div class="trigger-footer-widget-area">
 			<i class="getbowtied-icon-more-retailer"></i>
 		</div>
 	<?php } ?>
 
 	<div class="gbtr_widgets_footer_wrapper">
+		<?php get_template_part("light_footer"); ?>
+		<?php get_template_part("dark_footer"); ?>
+	</div>
 
-	<?php
-
-	get_template_part("dark_footer");
-
-	get_footer();
+	<?php get_footer();
 }

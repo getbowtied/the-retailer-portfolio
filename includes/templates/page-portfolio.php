@@ -16,15 +16,23 @@ get_header();
 ?>
 
 <div class="global_content_wrapper">
-	<div class="container_12">
-		<div class="grid_12">
 
+	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+	    <header class="entry-header">
 			<h1 class="entry-title portfolio_title"><?php the_title(); ?></h1>
+		</header>
 
-			<?php portfolio_output( $wp_query, $portfolio_items_per_row ); ?>
-		    
+	    <div class="entry-content">
+			<div class="content_wrapper">
+				<?php portfolio_output( $wp_query, $portfolio_items_per_row ); ?>
+	        </div>
 		</div>
-	</div>
+
+	</article>
+
+    <div class="clear"></div>
+
 </div>
 
 <?php gbt_get_page_footer(); ?>

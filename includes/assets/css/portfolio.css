@@ -2,14 +2,6 @@
   margin-bottom: 2.5rem;
   overflow: hidden; }
 
-.single-portfolio .global_content_wrapper {
-  margin: 70px auto 50px auto; }
-
-.single-portfolio .entry-content-portfolio {
-  margin-top: 4px !important; }
-  .single-portfolio .entry-content-portfolio img {
-    height: auto; }
-
 .single-portfolio .portfolio_related {
   border-top: 1px solid #ccc;
   margin-bottom: 30px;
@@ -79,17 +71,6 @@
     -webkit-transition: all .5s ease;
     -o-transition: all .5s ease;
     transition: all .5s ease; }
-  .portfolio_1_col_item_wrapper .img_zoom_in:hover .portfolio_item_img_container,
-  .portfolio_1_col_item_wrapper .img_zoom_in:focus .portfolio_item_img_container,
-  .portfolio_2_col_item_wrapper .img_zoom_in:hover .portfolio_item_img_container,
-  .portfolio_2_col_item_wrapper .img_zoom_in:focus .portfolio_item_img_container,
-  .portfolio_3_col_item_wrapper .img_zoom_in:hover .portfolio_item_img_container,
-  .portfolio_3_col_item_wrapper .img_zoom_in:focus .portfolio_item_img_container,
-  .portfolio_4_col_item_wrapper .img_zoom_in:hover .portfolio_item_img_container,
-  .portfolio_4_col_item_wrapper .img_zoom_in:focus .portfolio_item_img_container {
-    -webkit-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    transform: scale(1.1); }
 
 .portfolio_1_col_item_wrapper {
   width: 100%; }

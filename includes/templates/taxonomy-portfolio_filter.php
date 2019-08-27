@@ -9,16 +9,24 @@ get_header();
 
 ?>
 
-<div class="global_content_wrapper listing_portfolio_no_sidebar">
-	<div class="container_12">
-	    <div class="grid_12">
-	    
-	    	<h1 class="entry-title portfolio_title"><?php echo $term->name; ?></h1>
+<div class="global_content_wrapper">
 
-	        <?php portfolio_output( $wp_query, $items_per_row, false ); ?>
-	        
+	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+	    <header class="entry-header">
+			<h1 class="entry-title portfolio_title"><?php echo $term->name; ?></h1>
+		</header>
+
+	    <div class="entry-content">
+			<div class="content_wrapper">
+				<?php portfolio_output( $wp_query, $items_per_row, false ); ?>
+	        </div>
 		</div>
-	</div>
+
+	</article>
+
+    <div class="clear"></div>
+
 </div>
 
 <?php gbt_get_page_footer(); ?>

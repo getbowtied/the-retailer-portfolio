@@ -4,23 +4,8 @@
 	overflow: hidden;
 }
 
-.single-portfolio 
+.single-portfolio
 {
-	.global_content_wrapper
-	{
-		margin: 70px auto 50px auto;
-	}
-
-	.entry-content-portfolio
-	{
-		margin-top: 4px !important;
-
-		img
-		{
-			height: auto;
-		}
-	}
-
 	.portfolio_related
 	{
 	    border-top: 1px solid #ccc;
@@ -110,15 +95,6 @@
 		overflow: hidden;
 		padding-bottom: 72%;
 		transition: all .5s ease;
-	}
-
-	.img_zoom_in:hover,
-	.img_zoom_in:focus
-	{
-		.portfolio_item_img_container
-		{
-			transform: scale(1.1);
-		}
 	}
 }
 
@@ -266,7 +242,7 @@
 	{
 		max-height: 400px;
 	}
-	
+
 	.aside_portfolio
 	{
 		padding-left: 0;
