@@ -41,7 +41,7 @@ function portfolio_output( $wp_query, $items_per_row = 3, $filters = true, $extr
 
 	if( $wp_query->have_posts() ) : ?>
 
-		<div id="<?php echo $unique; ?>" class="content-area portfolio_section mixitup gbt_portfolio_wrapper <?php echo $extra_class; ?>">
+		<div id="<?php echo $unique; ?>" class="portfolio_section mixitup gbt_portfolio_wrapper <?php echo $extra_class; ?>">
 
 			<?php
 
@@ -76,7 +76,7 @@ function portfolio_output( $wp_query, $items_per_row = 3, $filters = true, $extr
 
 			?>
 
-	    	<div class="content_wrapper container">
+	    	<div class="portfolio_container portfolio_columns_<?php echo $items_per_row; ?>">
 
 				<?php while ($wp_query->have_posts()) : $wp_query->the_post();
 
@@ -88,14 +88,11 @@ function portfolio_output( $wp_query, $items_per_row = 3, $filters = true, $extr
 					}
 				?>
 
-					<div class="portfolio_item <?php echo $unique; ?> portfolio_<?php echo $items_per_row; ?>_col_item_wrapper mix <?php echo $categories; ?>">
+					<div class="portfolio_item <?php echo $unique; ?> mix <?php echo $categories; ?>">
 
-                    	<a class="img_zoom_in" href="<?php echo get_permalink(get_the_ID()); ?>">
-                            <div class="portfolio_item_img_container" style="background-image:url(<?php echo $related_thumb[0]; ?>)"></div>
-						</a>
-
-                        <a class="portfolio-title" href="<?php echo get_permalink(get_the_ID()); ?>">
-                        	<h3><?php the_title(); ?></h3>
+                        <a class="portfolio_link" href="<?php echo get_permalink(get_the_ID()); ?>">
+							<div class="portfolio_item_img_container" style="background-image:url(<?php echo $related_thumb[0]; ?>)"></div>
+                        	<h4 class="portfolio_title"><?php the_title(); ?></h4>
                         </a>
 
                         <div class="portfolio_sep"></div>

@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
 
 	$('.gbt_portfolio_wrapper.mixitup').each(function() {
 
-		var containerEl = $(this).find('.container');
+		var containerEl = $(this).find('.portfolio_container');
 		var uniqueId = $(this).attr('id');
 
 		var mixer = mixitup( containerEl, {

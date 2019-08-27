@@ -10,7 +10,7 @@ include_once 'functions/function-helpers.php';
 //==============================================================================
 if( !function_exists('gbt_18_tr_render_frontend_portfolio') ) {
 	function gbt_18_tr_render_frontend_portfolio( $attributes ) {
-		
+
 		extract(shortcode_atts(array(
 	        'number'                    => '12',
 	        'categoriesSavedIDs'        => '',
@@ -64,7 +64,13 @@ if( !function_exists('gbt_18_tr_render_frontend_portfolio') ) {
 		}
 
 		$portfolioItems = get_portfolio_items( $terms_array, null, $number, $order, $order_by, '' );
-		portfolio_output( $portfolioItems, $columns, $showFilters, '', $categories );
+		?>
+
+		<div class="gbt_portfolio_block_wrapper">
+			<?php portfolio_output( $portfolioItems, $columns, $showFilters, '', $categories ); ?>
+		</div>
+
+		<?php
 
 		wp_reset_query();
 
