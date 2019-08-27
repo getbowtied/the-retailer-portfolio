@@ -4,7 +4,7 @@
 
 	/* Blocks */
 	const registerBlockType   	= wp.blocks.registerBlockType;
-		
+
 	const InspectorControls 	= wp.editor.InspectorControls;
 	const RichText				= wp.editor.RichText;
 	const BlockControls			= wp.editor.BlockControls;
@@ -124,9 +124,9 @@
 					case 'title_desc':
 						query += '&orderby=title&order=desc';
 						break;
-					default: 
+					default:
 						break;
-				}	
+				}
 
 				return query;
 			}
@@ -248,7 +248,7 @@
 					for ( let i = 0; i < portfolio_items.length; i++ ) {
 
 						let portfolio_image = [];
-						if ( portfolio_items[i]['fimg_url'] ) { 
+						if ( portfolio_items[i]['fimg_url'] ) {
 							portfolio_image.push(
 								el( 'div',
 									{
@@ -262,15 +262,15 @@
 								)
 							);
 						};
- 
+
 						postElements.push(
-							el( "div", 
+							el( "div",
 								{
-									key: 		'gbt_18_tr_editor_portfolio_item_box_' + portfolio_items[i].id, 
+									key: 		'gbt_18_tr_editor_portfolio_item_box_' + portfolio_items[i].id,
 									className: 	'gbt_18_tr_editor_portfolio_item_box'
 								},
 								portfolio_image,
-								el( 'h2',
+								el( 'h4',
 									{
 										key: 'gbt_18_tr_editor_portfolio_item_title',
 										className: 'gbt_18_tr_editor_portfolio_item_title',
@@ -278,7 +278,7 @@
 									}
 								),
 								el( 'div',
-									{	
+									{
 										key: 		'gbt_18_tr_editor_portfolio_sep',
 										className: 	'gbt_18_tr_editor_portfolio_sep'
 									}
@@ -293,7 +293,7 @@
 							)
 						);
 					}
-				} 
+				}
 
 				wrapper.push(
 					el( 'div',
@@ -318,7 +318,7 @@
 				let options = [];
 				let optionsIDs = [];
 				let sorted = [];
-			
+
 				apiFetch({ path: '/wp/v2/portfolio-category?per_page=-1' }).then(function (categories) {
 
 				 	for( let i = 0; i < categories.length; i++) {
@@ -353,7 +353,7 @@
 										className: _categoryClassName( catArr[i].parent, catArr[i].value ) + ' ' + catArr[i].level,
 									},
 									el(
-									'input', 
+									'input',
 										{
 											type:  'checkbox',
 											key:   'category-checkbox-' + catArr[i].value,
@@ -376,7 +376,7 @@
 												props.setAttributes({ categoriesIDs: newCategoriesSelected });
 												props.setAttributes({ queryItems: _buildQuery(newCategoriesSelected, attributes.number, attributes.orderby) });
 											},
-										}, 
+										},
 									),
 									catArr[i].label,
 									el(
@@ -388,11 +388,11 @@
 								renderCategories( catArr[i].value, level+1)
 							),
 						);
-					} 
-				}	
+					}
+				}
 				if (categoryElements.length > 0 ) {
 					let wrapper = el('ul', {className: 'level-' + level}, categoryElements);
-					return wrapper;		
+					return wrapper;
 				} else {
 					return;
 				}

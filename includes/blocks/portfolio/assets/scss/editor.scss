@@ -18,15 +18,13 @@
 				background-position: center;
 				background-repeat: no-repeat;
 			    width: 100%;
-   				padding-bottom: 50%;
+   				padding-bottom: 70%;
 				transition: opacity 0.35s, transform 0.35s;
 			}
 
 			.gbt_18_tr_editor_portfolio_item_title {
 			    margin: 15px;
 			    text-align: center;
-			    font-size: 18px;
-			    line-height: 1.4;
 			}
 
 			.gbt_18_tr_editor_portfolio_item_categories {
@@ -37,7 +35,7 @@
 			}
 
 			.gbt_18_tr_editor_portfolio_sep {
-			    width: 15%;
+			    width: 25%;
 			    height: 2px;
 			    background: #b39964;
 			    margin: 0 auto;
@@ -71,19 +69,6 @@
 
 			&:nth-child(4n+1) {
 				clear: both;
-			}
-		}
-	}
-}
-
-.editor-block-list__block[data-type="getbowtied/tr-portfolio"][data-align="center"] {
-	.gbt_18_tr_editor_portfolio_wrapper {
-		.gbt_18_tr_editor_portfolio_items {
-			.gbt_18_tr_editor_portfolio_item_box {
-				.gbt_18_tr_editor_portfolio_item_title {
-					font-size: 14px;
-					margin: 10px 15px;
-				}
 			}
 		}
 	}
