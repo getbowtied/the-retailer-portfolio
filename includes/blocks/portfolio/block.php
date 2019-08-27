@@ -66,7 +66,7 @@ if( !function_exists('gbt_18_tr_render_frontend_portfolio') ) {
 		$portfolioItems = get_portfolio_items( $terms_array, null, $number, $order, $order_by, '' );
 		?>
 
-		<div class="gbt_portfolio_block_wrapper">
+		<div class="gbt_portfolio_block_wrapper align<?php echo esc_attr($align); ?>">
 			<?php portfolio_output( $portfolioItems, $columns, $showFilters, '', $categories ); ?>
 		</div>
 

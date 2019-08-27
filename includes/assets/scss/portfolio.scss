@@ -1,9 +1,19 @@
+.gbt_portfolio_block_wrapper
+{
+	&.alignfull
+	{
+		@media all and (min-width: 640px) {
+			padding: 0 25px;
+		}
+	}
+}
+
 .gbt_portfolio_wrapper
 {
 	.portfolio_categories
 	{
 		margin: 0;
-		padding: 0;
+		padding: 0 25px;
 		list-style: none;
 		text-align: center;
 
