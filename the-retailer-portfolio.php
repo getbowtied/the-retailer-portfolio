@@ -4,13 +4,13 @@
  * Plugin Name:       		The Retailer Portfolio Addon
  * Plugin URI:        		https://theretailer.wp-theme.design/
  * Description:       		Extends the functionality of your WordPress site by adding a 'Portfolio' custom post type allowing you to organize and showcase you your work or products.
- * Version:           		1.1
+ * Version:           		1.2
  * Author:            		GetBowtied
  * Author URI:				https://getbowtied.com
  * Text Domain:				the-retailer-portfolio
  * Domain Path:				/languages/
  * Requires at least: 		5.0
- * Tested up to: 			5.2.1
+ * Tested up to: 			5.2.3
  *
  * @package  The Retailer Portfolio
  * @author   GetBowtied
@@ -136,11 +136,11 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 				'default'     			=> 3,
 			) );
 
-			$wp_customize->add_control( 
+			$wp_customize->add_control(
 				new WP_Customize_Control(
 					$wp_customize,
 					'tr_portfolio_items_per_row',
-					array( 
+					array(
 						'type'			=> 'number',
 						'label'       	=> esc_attr__( 'Number of Portfolio Items per row', 'the-retailer-portfolio' ),
 						'section'     	=> 'portfolio',
@@ -160,11 +160,11 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 				'default'     			=> 'date',
 			) );
 
-			$wp_customize->add_control( 
+			$wp_customize->add_control(
 				new WP_Customize_Control(
 					$wp_customize,
 					'tr_portfolio_items_order_by',
-					array( 
+					array(
 						'type'			=> 'select',
 						'label'       	=> esc_attr__( 'Order By', 'the-retailer-portfolio' ),
 						'section'     	=> 'portfolio',
@@ -183,11 +183,11 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 				'default'     			=> 'DESC',
 			) );
 
-			$wp_customize->add_control( 
+			$wp_customize->add_control(
 				new WP_Customize_Control(
 					$wp_customize,
 					'tr_portfolio_items_order',
-					array( 
+					array(
 						'type'			=> 'select',
 						'label'       	=> esc_attr__( 'Order By', 'the-retailer-portfolio' ),
 						'section'     	=> 'portfolio',
@@ -243,8 +243,8 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 		public static function gbt_register_styles() {
 			add_action( 'wp_enqueue_scripts', function() {
 				wp_enqueue_style(
-					'gbt-tr-portfolio-styles', 
-					plugins_url( 'includes/assets/css/portfolio.css', __FILE__ ), 
+					'gbt-tr-portfolio-styles',
+					plugins_url( 'includes/assets/css/portfolio.css', __FILE__ ),
 					NULL
 				);
 			} );
@@ -260,7 +260,7 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 
 				wp_enqueue_script(
 					'gbt-tr-mixitup-scripts',
-					plugins_url( 'includes/assets/js/vendor/mixitup.min.js', __FILE__ ), 
+					plugins_url( 'includes/assets/js/vendor/mixitup.min.js', __FILE__ ),
 					array('jquery'),
 					false,
 					true
@@ -268,7 +268,7 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 
 				wp_enqueue_script(
 					'gbt-tr-portfolio-scripts',
-					plugins_url( 'includes/assets/js/portfolio.js', __FILE__ ), 
+					plugins_url( 'includes/assets/js/portfolio.js', __FILE__ ),
 					array('jquery'),
 					false,
 					true
@@ -284,9 +284,9 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 		*/
 		public static function gbt_mt_portfolio_template( $template ) {
 			global $post;
-			
+
 			if ( $post->post_type == 'portfolio' ) {
-				$template = plugin_dir_path(__FILE__) . 'includes/templates/single-portfolio.php';		        
+				$template = plugin_dir_path(__FILE__) . 'includes/templates/single-portfolio.php';
 		    }
 
 		    return $template;
@@ -313,7 +313,7 @@ if ( ! class_exists( 'TheRetailerPortfolio' ) ) :
 		*/
 		public static function gbt_mt_portfolio_page_template( $template ) {
 
-			if( is_page_template( 'page-portfolio.php' ) ) {			
+			if( is_page_template( 'page-portfolio.php' ) ) {
 				$template = plugin_dir_path(__FILE__) . 'includes/templates/page-portfolio.php';
 			}
 
