@@ -1,22 +1,25 @@
 ( function( blocks, components, editor, i18n, element ) {
 
-	const el 					= element.createElement;
+	const el = element.createElement;
 
 	/* Blocks */
-	const registerBlockType   	= wp.blocks.registerBlockType;
+	const registerBlockType = wp.blocks.registerBlockType;
+	const apiFetch = wp.apiFetch;
 
-	const InspectorControls 	= wp.editor.InspectorControls;
-	const RichText				= wp.editor.RichText;
-	const BlockControls			= wp.editor.BlockControls;
+	const {
+		TextControl,
+		ToggleControl,
+		RangeControl,
+		SelectControl,
+		SVG,
+		Path,
+	} = wp.components;
 
-	const TextControl 			= wp.components.TextControl;
-	const ToggleControl			= wp.components.ToggleControl;
-	const RangeControl			= wp.components.RangeControl;
-	const SelectControl			= wp.components.SelectControl;
-	const SVG 					= wp.components.SVG;
-	const Path 					= wp.components.Path;
-
-	const apiFetch 				= wp.apiFetch;
+	const {
+		InspectorControls,
+		RichText,
+		BlockControls,
+	} = wp.blockEditor;
 
 	/* Register Block */
 	registerBlockType( 'getbowtied/tr-portfolio', {
