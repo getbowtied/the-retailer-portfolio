@@ -4,13 +4,13 @@
  * Plugin Name:       		The Retailer Portfolio Addon
  * Plugin URI:        		https://theretailer.wp-theme.design/
  * Description:       		Extends the functionality of your WordPress site by adding a 'Portfolio' custom post type allowing you to organize and showcase you your work or products.
- * Version:           		1.2.3
+ * Version:           		1.2.4
  * Author:            		GetBowtied
  * Author URI:				https://getbowtied.com
  * Text Domain:				the-retailer-portfolio
  * Domain Path:				/languages/
  * Requires at least: 		5.0
- * Tested up to: 			5.3.1
+ * Tested up to: 			5.4
  *
  * @package  The Retailer Portfolio
  * @author   GetBowtied
