@@ -1,4 +1,4 @@
-jQuery(document).ready(function($) {
+jQuery( function($) {
 
     "use strict";
 
@@ -14,5 +14,4 @@ jQuery(document).ready(function($) {
 	     	}
     	});
 	});
-
 });
